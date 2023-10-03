@@ -1,27 +1,29 @@
-# React + TypeScript + Vite
+# Performance Workshop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+execute `npm run dev` to visualize the workshop
 
-Currently, two official plugins are available:
+## 00- React.Memo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- El componente InefficientList se vuelve a renderizar cada vez que el estado de items cambia, incluso si los elementos en la lista siguen siendo los mismos. Esto puede provocar re-renderizaciones innecesarias y afectar el rendimiento
+- Mejora el componente utilizando React.memo para evitar re-renderizaciones innecesarias
 
-## Expanding the ESLint configuration
+## 01- UseMemo
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- El siguiente componente calcula una operación costosa en cada renderizado, incluso si la entrada no ha cambiado
+- Mejora el componente utilizando useMemo para evitar calculos innecesarias
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+## 02- UseCallback
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Tienes un componente funcional que define una función callback en cada renderizado, incluso si esa función no cambia.
+- Utiliza useCallback para evitar este comportamiento ineficiente.
+
+## 03- InefficientuseEffect
+
+- El useEffect se ejecuta en cada renderizado, lo que significa que actualizará el título de la página en cada cambio de estado
+- Modifica el useEffect para evitar actualizarlo solo cuando sea necesario.
+
+## 04- Lazy Loading
+
+- Al cargar por primera vez la pagina se cargan ambas Tabs, aunque el usuario no esté visualizando una de ellas
+- Utiliza React.lazy y Suspense para cargar los componentes usando lazy loading.
